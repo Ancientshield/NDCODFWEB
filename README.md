@@ -11,17 +11,6 @@
 ### 二、至GutHub下載程式碼並編譯OxOffice所需的套件
 
 
-安裝nvm
-```
-wget -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
-```
-
-安裝nodejs
-```
-nvm install v10
-nvm use v10
-```
-
 手動編譯Poco library
 
 ```
@@ -51,3 +40,37 @@ make run → 運行後端，等編譯完loleaflet再執行，要使用非root的
 exit
 ```
 
+安裝nvm
+```
+wget -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+```
+
+安裝nodejs
+```
+nvm install node
+nvm use node
+export NODE_HOME=/.nvm/versions/node/v14.5.0
+export PATH=$NODE_HOME/bin:$PATH
+```
+
+
+安裝編譯 OxOOL 要用的套件(編譯 OxOffice 大多數所需的套件都和 LibreOffice 相同)
+```
+rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+yum install git yum-utils libpcap libcap-devel poco-devel ccache python3-pip -y
+pip3 install --upgrade pip
+pip3 install wheel
+pip3 install polib
+yum-builddep libreoffice -y
+```
+安裝python2
+```
+pip2 install --user polib
+```
+
+安裝NDCODFWEB
+```
+cd NDCODFWEB-V1.4/ndcodfsys
+yum localinstall gumbo* -y
+yum localinstall ndcodfsys* -y
+```
