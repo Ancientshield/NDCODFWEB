@@ -27,16 +27,27 @@ nvm use v10
 ```
 wget http://pocoproject.org/releases/poco-1.9.0/poco-1.9.0-all.tar.gz
 tar zxvf poco-1.9.0-all.tar.gz
+sudo yum localinstall poco* -y
 yum install openssl-devel -y
 cd poco-1.9.0-all/
 yum install gcc-c++ -y
-./configure --prefix=/opt/poco && make install
+./configure --prefix=/opt/poco
+sudo make install
 ```
 
-git clone oxool-community
+編譯OxOffice
 
 ```
 git clone https://github.com/OSSII/oxool-community.git
 cd oxool-community
-
+./configure --enable-silent-rules --with-lokit-path=./bundled/include --with-lo-path=/opt/ndcodfsys --enable-debug --disable-werror --disable-ssl --with-poco-includes=/opt/poco/include --with-poco-libs=/opt/poco/lib
+make
+mkdir /etc/loolwsd
+cp etc/*.pem /etc/loolwsd/
+mkdir -p /usr/local/var/cache/loolwsd
+chown oxoffice.root /usr/local/var/cache/loolwsd
+chown oxoffice.oxoffice -R /home/oxoffice/online
+make run → 運行後端，等編譯完loleaflet再執行，要使用非root的帳號。
+exit
 ```
+
