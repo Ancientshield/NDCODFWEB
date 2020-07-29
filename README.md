@@ -61,6 +61,7 @@ yum install openssl-devel -y
 cd poco-1.9.0-all/
 yum install gcc-c++ -y
 ./configure --prefix=/opt/poco
+sudo make -j4
 sudo make install
 ```
 
@@ -104,27 +105,4 @@ cd ndcodfweb
 make
 mkdir /etc/loolwsd
 make run
-```
-
-
-========================================================
-
-(保留區)
-
-改777(?)
-```
-cp etc/*.pem /etc/loolwsd/
-mkdir -p /usr/local/var/cache/loolwsd
-chown oxoffice.root /usr/local/var/cache/loolwsd
-chown oxoffice.oxoffice -R /home/oxoffice/online
-```
-
-安裝編譯 OxOffice 要用的套件(編譯 OxOffice 大多數所需的套件都和 LibreOffice 相同)
-```
-rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-yum install git yum-utils libpcap libcap-devel poco-devel ccache python3-pip -y
-pip3 install --upgrade pip
-pip3 install wheel
-pip3 install polib
-yum-builddep libreoffice -y
 ```
